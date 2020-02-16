@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tutorial_series/components/FavoriteWidget.dart';
+
+import 'components/GrowingBox.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,7 +23,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: StatefulExample(),
     );
   }
 }
@@ -61,5 +64,36 @@ class MyHomePage extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class StatefulExample extends StatefulWidget {
+  @override
+  _StatefulExampleState createState() => _StatefulExampleState();
+}
+
+class _StatefulExampleState extends State<StatefulExample> {
+  bool isBox = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: isBox ? GrowingBox() : FavoriteWidget(),
+      ),
+      floatingActionButton: FloatingActionButton(onPressed: changeBool),
+    );
+  }
+
+  void changeBool() {
+    if (isBox) {
+      setState(() {
+        isBox = false;
+      });
+    } else {
+      setState(() {
+        isBox = true;
+      });
+    }
   }
 }
